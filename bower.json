@@ -1,12 +1,12 @@
 {
-  "name": "multicraft",
+  "name": "grunt-breakout",
   "version": "0.0.0",
   "authors": [
     "Connor Peet <connor@connorpeet.com>"
   ],
   "main": "Gruntfile.js",
-  "license": "Proprietary",
-  "homepage": "https://github.com/connor4312/multicraft",
+  "license": "MIT",
+  "homepage": "https://github.com/connor4312/grunt-breakout",
   "private": true,
   "ignore": [
     "**/.*",
@@ -16,8 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.0.2",
-    "font-awesome": "~4.0.3",
-    "jquery-knob": "~1.2.3"
+    "bootstrap": "~3.0.2"
   }
 }
