@@ -137,7 +137,8 @@ module.exports = function(grunt) {
     },
     clean: {
       statics: ['dist'],
-      pack: ['dist.zip']
+      pack: ['dist.zip'],
+      postbuild: ['.tmp']
     },
     watch: {
       copy: {
@@ -167,10 +168,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-svgmin');
 
-  grunt.registerTask('default', ['clean:statics', 'coffee:compile', 'concurrent:dev']);
-  grunt.registerTask('spy', ['clean:statics', 'coffee:compile', 'concurrent:dev', 'concurrent:watch']);
+  grunt.registerTask('default', ['clean:statics', 'coffee:compile', 'concurrent:dev', 'clean:postbuild']);
+  grunt.registerTask('spy', ['clean:statics', 'coffee:compile', 'concurrent:dev', 'concurrent:watch', 'clean:postbuild']);
 
-  grunt.registerTask('dist', ['clean:statics', 'coffee:compile', 'concurrent:dist']);
-  grunt.registerTask('pack', ['clean:statics', 'clean:pack', 'coffee:compile', 'concurrent:dist', 'compress:pack']);
+  grunt.registerTask('dist', ['clean:statics', 'coffee:compile', 'concurrent:dist', 'clean:postbuild']);
+  grunt.registerTask('pack', ['clean:statics', 'clean:pack', 'coffee:compile', 'concurrent:dist', 'compress:pack', 'clean:postbuild']);
 
 };
