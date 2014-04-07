@@ -1,12 +1,15 @@
 module.exports = function(grunt) {
 
+  var source_directory = 'src',
+      target_directory = 'dist';
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     coffee: {
       compile: {
         expand: true,
-        cwd: 'src/js',
+        cwd: source_directory + '/js',
         src: ['**/*.coffee'],
         dest: '.tmp/js',
         ext: '.js'
@@ -16,22 +19,22 @@ module.exports = function(grunt) {
       dev: {
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['**/*.{jpg,ico,gif,png,js,eot,svg,ttf,woff,php,html}'],
-          dest: 'dist'
+          dest: target_directory
         }, {
           expand: true,
           cwd: '.tmp/js',
           src: ['**/*.js'],
-          dest: 'dist/js'
+          dest: target_directory + '/js'
         }]
       },
       dist: {
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['**/*.{ico,eot,woff,ttf,php}'],
-          dest: 'dist'
+          dest: target_directory
         }]
       }
     },
@@ -43,9 +46,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['**/*.html'],
-          dest: 'dist',
+          dest: target_directory,
           ext: '.html'
         }]
       }
@@ -54,9 +57,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['img/**/*.{png,gif,jpg}'],
-          dest: 'dist',
+          dest: target_directory,
         }]
       }
     },
@@ -67,9 +70,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['css/style.less'],
-          dest: 'dist',
+          dest: target_directory,
           ext: '.css'
         }]
       },
@@ -79,9 +82,9 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['css/*.less'],
-          dest: 'dist',
+          dest: target_directory,
           ext: '.css'
         }]
       }
@@ -90,9 +93,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['**/*.svg'],
-          dest: 'dist',
+          dest: target_directory,
         }]
       }
     },
@@ -103,15 +106,15 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'src',
+          cwd: source_directory,
           src: ['js/*.js'],
-          dest: 'dist',
+          dest: target_directory,
           ext: '.js'
         }, {
           expand: true,
           cwd: '.tmp/js',
           src: ['**/*.js'],
-          dest: 'dist/js',
+          dest: target_directory + '/js',
           ext: '.js'
         }]
       }
@@ -120,11 +123,11 @@ module.exports = function(grunt) {
     compress: {
       pack: {
         options: {
-          archive: 'dist.zip'
+          archive: 'distribution.zip'
         },
         files: [{
           expand: true,
-          cwd: 'dist',
+          cwd: target_directory,
           src: ['**'],
           dest: '/',
         }]
@@ -136,21 +139,21 @@ module.exports = function(grunt) {
       watch: ['watch:copy', 'watch:less', 'watch:coffee']
     },
     clean: {
-      statics: ['dist'],
-      pack: ['dist.zip'],
+      statics: [target_directory],
+      pack: ['distribution.zip'],
       postbuild: ['.tmp']
     },
     watch: {
       copy: {
-        files: ['src/**/*.{jpg,ico,gif,png,js}'],
+        files: [source_directory + '/**/*.{jpg,ico,gif,png,js}'],
         tasks: ['copy:dev']
       },
       coffee: {
-        files: ['src/js/**/*.coffee'],
+        files: [source_directory + '/js/**/*.coffee'],
         tasks: ['coffee:compile', 'copy:dev']
       },
       less: {
-        files: ['src/css/*.less'],
+        files: [source_directory + '/css/*.less'],
         tasks: ['less:dev']
       }
     },
